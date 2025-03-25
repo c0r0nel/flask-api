@@ -1,5 +1,5 @@
 # flask-api
-Tiny api sample built on python/flash using redis to queue messages. This example includes authentication, some basic tests and Metrics exportto be collected by prometheus.
+Tiny api sample built on python/flask using redis to queue messages. This example includes authentication, some basic tests and Metrics export to be collected by prometheus.
 
 ## Running locally
 
@@ -59,3 +59,13 @@ Run test:
 ```shell
 pytest test_app.py
 ```
+
+## Automation
+in .github/workflows directory there are two worflows:
+- `ci.ymal` to run tests on every push and merge.
+- `docker.yaml` to manully build and push docker image to dockerhub.
+
+In order to test this two workflows you need to set up two repository secrets on your github `/settings/secrets/actions`
+- API_KEY (set any value you want)
+- DOCKER_HUB_TOKEN
+This one is needed to allow github to push images to our DockerHub account. Yo need to create this token on your dockerhub account fisrt and the use the value here.
