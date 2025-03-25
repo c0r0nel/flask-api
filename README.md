@@ -23,7 +23,7 @@ export REDIS_HOST="localhost"
 6. Play with api pushing and poping messages:
 
 ```shell
-curl -X POST http://127.0.0.1:5001/api/queue/push -H "API-Key: somekey" -H "Content-Type: application/json" -d '{"message": "Testing queuing a single messagey"}'
+curl -X POST http://127.0.0.1:5001/api/queue/push -H "API-Key: somekey" -H "Content-Type: application/json" -d '{"message": "Testing queuing a single message"}'
 ```
 ```shell
 curl -X GET http://127.0.0.1:5001/api/queue/count -H "API-Key: somekey"
@@ -36,4 +36,26 @@ You should receive confirmations or error messages for each request.
 In addition you also can query the `/metrics` endpoint to check if it's collectiong data correctly.
 ```shell
 curl -X GET http://127.0.0.1:8000/metrics
+```
+
+## Running tests
+To run tests you need to create and activate a pyton env first:
+
+```shell
+python3 -m venv env
+source env/bin/activate
+```
+then you need to install all dependencies on that env:
+
+```shell
+pip install --no-cache-dir -r requirements.txt
+```
+as last step before running tests, be sure to have env var exported:
+```shell
+export APK_KEY="somekey"
+export REDIS_HOST="localhost"
+```
+Run test:
+```shell
+pytest test_app.py
 ```
