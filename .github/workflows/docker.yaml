@@ -12,4 +12,5 @@ jobs:
         run: docker build . -t c0r0nel/flask-api-app:latest
       - name: Push image to docker hub
         run: |
+          docker login -u c0r0nel -p ${{ secrets.DOCKER_HUB_TOKEN }}
           docker push c0r0nel/flask-api-app:latest
