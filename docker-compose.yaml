@@ -2,10 +2,10 @@ services:
   flask-api-app:
     build: .
     ports:
-      - "5001:5000"
+      - "5001:5001"
       - "8000:8000"
     environment:
-      - API_KEY=peperina
+      - API_KEY=somekey
       - REDIS_HOST=redis
     depends_on:
       - redis
