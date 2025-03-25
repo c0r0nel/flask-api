@@ -1,1 +1,39 @@
 # flask-api
+Tiny api sample built on python/flash using redis to queue messages. This example includes authentication, some basic tests and Metrics exportto be collected by prometheus.
+
+## Running locally
+
+To locally run this app you can rely on docker-copose.
+
+### Steps:
+1. Clone respository
+```shell
+ git clone git@github.com:c0r0nel/flask-api.git
+```
+3.  cd into flask-api directory
+4. Edit `docker-compose.yaml` file and update the API_KEY env var with some powerful key and then run compose:
+```shell
+docker-compose up
+```
+5. Export some needed env vars:
+```shell
+export APK_KEY="somekey"
+export REDIS_HOST="localhost"
+```
+6. Play with api pushing and poping messages:
+
+```shell
+curl -X POST http://127.0.0.1:5001/api/queue/push -H "API-Key: somekey" -H "Content-Type: application/json" -d '{"message": "Testing queuing a single messagey"}'
+```
+```shell
+curl -X GET http://127.0.0.1:5001/api/queue/count -H "API-Key: somekey"
+```
+```shell
+curl -X POST http://127.0.0.1:5001/api/queue/pop -H "API-Key: somekey"
+```
+You should receive confirmations or error messages for each request.
+
+In addition you also can query the `/metrics` endpoint to check if it's collectiong data correctly.
+```shell
+curl -X GET http://127.0.0.1:8000/metrics
+```
